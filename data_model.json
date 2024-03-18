@@ -1,0 +1,33 @@
+{
+	"_id": "800",
+	"nombre": "Nombre Aseguradora",
+	"ejercicios": [
+		{
+			"year": 2024,
+			"month": 1,
+			"estado_financiero": {
+				"balance_general": {
+					"total_activos": 0,
+					"total_pasivos": 0,
+					"capital_social": 0,
+					"resultado_del_ejercicio": 0,
+					"total_patrimonio_neto": 0
+				},
+				"estado_de_resultado": {
+					"resultado_tecnico_bruto": 0,
+					"gastos_de_produccion": 0,
+					"gastos_de_cesion_reaseguros_local": 0,
+					"gastos_de_cesion_reaseguros_exterior": 0,
+					"gastos_tecnicos_de_explotacion": 0,
+					"constitucion_de_previsiones": 0,
+					"resultado_tecnico_neto": 0,
+					"resultado_total_del_ejercicio": 0
+				},
+				"ingresos_y_egresos": {
+					"resultado_del_ejercicio": 0
+				}
+			}
+		}
+	]
+}
+
