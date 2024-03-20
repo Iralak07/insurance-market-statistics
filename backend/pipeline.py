@@ -24,12 +24,16 @@ def extract_dataframes(dataframes_dic: dict) -> list:
         dataframes = [balance_general, estado_resultados, ingresos_egresos]
         return dataframes
 
-dataframes_dic = load_excel_sheets(FILE_PATH)
-dataframes = extract_dataframes(dataframes_dic)
-df_list = generate_df_list(dataframes, ROWS, COLUMNS)
-df = df_list[2]
 
-def process_data(dataframe, year: int, month: str, rows: list = ROWS, columns: list = COLUMNS):   
+def generate_dataframes_list(file_path: str=FILE_PATH, rows: list=ROWS, columns: list=COLUMNS) -> list:
+        # Generate a list of dataframes, one for each column
+        dataframes_dic = load_excel_sheets(file_path)
+        dataframes = extract_dataframes(dataframes_dic)
+        dfs_list = generate_df_list(dataframes, rows, columns)
+        return dfs_list
+
+
+def process_data(dataframe, year: int, month: str):   
         new_dict = transform_keys(create_dict_from_df(dataframe))
         new_dict = add_insurer_id(new_dict)
         new_dict = add_date_info(new_dict, year, month)
@@ -39,5 +43,5 @@ def process_data(dataframe, year: int, month: str, rows: list = ROWS, columns: l
 
 
 if __name__ == "__main__":
-        print(process_data(df, 2024, "enero"))
+        print(process_data(generate_dataframes_list()[0], 2024, "enero"))
     

@@ -22,7 +22,7 @@ async def get_all_insurers():
         raise HTTPException(status_code=400, detail=str(e))
 
 
-@router.get("/insurer/{insurer_id}/exercises")
+@router.get("/exercise/{insurer_id}")
 async def get_exercises_by_insurer(insurer_id: str):
     try:
         return await get_financial_exercises_by_insurer(insurer_id)
@@ -30,7 +30,7 @@ async def get_exercises_by_insurer(insurer_id: str):
         raise HTTPException(status_code=400, detail=str(e))
 
 
-@router.post("/insurer/exercises")
+@router.post("/exercise")
 async def upload_exercise(data: dict):
     try:
         result = await upload_financial_exercise(data)
