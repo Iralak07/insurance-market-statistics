@@ -6,10 +6,14 @@ from config import MONGODB_URI
 # Get the URI from the .env file
 uri = MONGODB_URI
 
-client = motor.motor_asyncio.AsyncIOMotorClient(uri)
-database = client.get_database("insurer_market_statistics")
-insurer_collection = database.get_collection("insurance_companies")
-exercises_collection = database.get_collection("financial_exercises")
+
+def setup_database(uri):
+    client = motor.motor_asyncio.AsyncIOMotorClient(uri)
+    database = client.get_database("insurer_market_statistics")
+    insurer_collection = database.get_collection("insurance_companies")
+    exercises_collection = database.get_collection("financial_exercises")
+
+    return insurer_collection, exercises_collection
 
 
 def insurer_helper(insurer) -> dict:
@@ -53,4 +57,4 @@ async def upload_financial_exercise(data) -> str:
 
 
 
- 
+insurer_collection, exercises_collection = setup_database(uri)
