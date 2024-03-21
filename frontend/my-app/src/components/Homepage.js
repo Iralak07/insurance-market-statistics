@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import DataTable from './DataTable';
 
 function Homepage() {
     const [insurerId, setInsurerId] = useState(null);
@@ -40,11 +41,11 @@ function Homepage() {
 				</div>
 			)}
 			{exercisesData && (
-				<div>
-					<h2>Exercises Data:</h2>
-					<pre>{JSON.stringify(exercisesData, null, 2)}</pre>
-				</div>
-			)}
+            <div>
+                <h2>Exercises Data:</h2>
+                <DataTable data={exercisesData} />
+            </div>
+            )}
 		</div>
 	);
 }
