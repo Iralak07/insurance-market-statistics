@@ -29,11 +29,11 @@ function Homepage() {
     };
 
 	return (
-		<div>
-			<h1>Welcome to the Homepage</h1>
-			<button onClick={fetchInsurers}>Get Insurers</button>
-            <input type="text" value={insurerId} onChange={handleInputChange} placeholder="Enter insurer ID" />
-			<button onClick={handleButtonClick}>Get Exercises</button>
+		<div class="main">
+			<h1 class="header">Welcome to the Homepage</h1>
+			<button class="myButton" onClick={fetchInsurers}>Get Insurers</button>
+            <input class="text-input" type="text" value={insurerId} onChange={handleInputChange} placeholder="Enter insurer ID" />
+			<button class="myButton" onClick={handleButtonClick}>Get Exercises</button>
 			{insurersData && (
 				<div>
 					<h2>Insurers Data:</h2>
@@ -41,10 +41,10 @@ function Homepage() {
 				</div>
 			)}
 			{exercisesData && (
-            <div>
-                <h2>Exercises Data:</h2>
-                <DataTable data={exercisesData} />
-            </div>
+            	<div>
+                	<h2>Exercises Data:</h2>
+                	<DataTable class="data-table" data={exercisesData} />
+            	</div>
             )}
 		</div>
 	);
