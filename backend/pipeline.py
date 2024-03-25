@@ -1,4 +1,5 @@
 import pandas as pd
+import asyncio
 import numpy as np
 import openpyxl
 from preprocessing_tools import (
@@ -6,6 +7,7 @@ from preprocessing_tools import (
         transform_keys, add_insurer_id, add_date_info, restructure_data,
         format_for_mongodb)
 from config import FILE_PATH, ROWS, COLUMNS
+from database import upload_financial_exercise
 
 
 def load_excel_sheets(file_path: str) -> dict:
@@ -38,10 +40,29 @@ def process_data(dataframe, year: int, month: str):
         new_dict = add_insurer_id(new_dict)
         new_dict = add_date_info(new_dict, year, month)
         new_dict = restructure_data(new_dict)
-        new_json = format_for_mongodb(new_dict)
-        return new_json
+        # new_json = format_for_mongodb(new_dict)
+        return new_dict
+
+
+async def process_file(year: int, month: str, file_path: str):
+        if file_path.endswith('.xlsx') or file_path.endswith('.xls'):
+                try:
+                        df_list = generate_dataframes_list(file_path)
+                        processed_data = [process_data(df, year, month) for df in df_list]
+                        ids = []
+                        for data in processed_data:
+                                id = await upload_financial_exercise(data)
+                                ids.append(id)
+                        return {"inserted_ids": ids}
+                except Exception as e:
+                        raise Exception("Invalid file format")
+        else:
+                raise Exception("Invalid file format")
+    
 
 
 if __name__ == "__main__":
-        print(process_data(generate_dataframes_list()[0], 2024, "enero"))
+        import asyncio
+        #print(process_data(generate_dataframes_list()[0], 2024, "enero"))
+        print(asyncio.run(process_file(2024, "enero", "MES.xlsx")))
     
