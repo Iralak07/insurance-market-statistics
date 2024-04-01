@@ -6,6 +6,8 @@ from database import (
         retrieve_insurer,
         get_financial_exercises_by_insurer,
         upload_financial_exercise,
+        get_field_value,
+        get_all_field_values
 )
 
 from pipeline import (
@@ -36,6 +38,27 @@ async def get_exercises_by_insurer(insurer_id: str):
         raise HTTPException(status_code=400, detail=str(e))
 
 
+@router.get("/field_value/{insurer_id}/{year}/{month}/{field}")
+async def get_field_value_route(insurer_id: str, year: int, month: str, field: str):
+    value = await get_field_value(insurer_id, year, month, field)
+    if value is not None:
+        return {"value": value}
+    else:
+        raise HTTPException(status_code=404, detail="Document not found or field does not exist")
+    
+
+@router.get("/all_field_values/{year}/{month}/{field}")
+async def get_all_field_values_route(year: int, month: str, field: str):
+    try:
+        results = await get_all_field_values(year, month, field)
+        if results:
+            return results
+        else:
+            raise HTTPException(status_code=404, detail="No documents found for the given year and month")
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    
+    
 @router.post("/exercise")
 async def upload_exercise(data: dict):
     try:
