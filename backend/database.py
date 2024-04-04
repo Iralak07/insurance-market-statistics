@@ -100,6 +100,66 @@ async def get_all_field_values(year, month, field):
     return results        
 
 
+async def delete_one_document(insurer_id, year, month):
+    # Delete the document that matches the given parameters
+    result = await exercises_collection.delete_one({
+        'insurer_id': insurer_id,
+        'year': year,
+        'month': month
+    })
+
+    # result.deleted_count contains the number of deleted documents
+    if result.deleted_count:
+        return {"status": "success", "message": f"Deleted {result.deleted_count} documents." }
+    else:
+        return {"status": "failure", "message": "No documents matched the given parameters."}
+
+
+async def delete_many_document(insurer_id, year, month):
+    # Delete all the documents that matches the given parameters
+    result = await exercises_collection.delete_many({
+        'insurer_id': insurer_id,
+        'year': year,
+        'month': month
+    })
+
+    # result.deleted_count contains the number of deleted documents
+    if result.deleted_count:
+        return {"status": "success", "message": f"Deleted {result.deleted_count} document(s)."}
+    else:
+        return {"status": "failure", "message": "No documents matched the given parameters."}
+    
+
+
+async def delete_documents_by_date(year=None, month=None):
+    # Create a dictionary with the parameters that are not None
+    query = {}
+    if year is not None:
+        query['year'] = year
+    if month is not None:
+        query['month'] = month
+
+    # Delete the documents that match the given parameters
+    result = await exercises_collection.delete_many(query)
+
+    # result.deleted_count contains the number of deleted documents
+    if result.deleted_count:
+        return {"status": "success", "message": f"Deleted {result.deleted_count} document(s)."}
+    else:
+        return {"status": "failure", "message": "No documents matched the given parameters."}
+
+
+async def delete_document_by_id(document_id):
+    # Delete the document that matches the given id
+    result = await exercises_collection.delete_one({'_id': ObjectId(document_id)})
+
+    # result.deleted_count contains the number of deleted documents
+    if result.deleted_count:
+        return {"status": "success", "message": f"Deleted {result.deleted_count} document."}
+    else:
+        return {"status": "failure", "message": "No documents matches the given parameters."}
+
+
 async def upload_financial_exercise(data) -> str:
     # Insert the document into the collection
     result = await exercises_collection.insert_one(data)

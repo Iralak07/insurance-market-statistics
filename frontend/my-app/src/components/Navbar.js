@@ -8,6 +8,7 @@ function Navbar() {
                 <li class="nav-item">
                     <Link to="/">Home</Link>
                     <Link to="/upload">Upload</Link>
+                    <Link to="/charts">Charts</Link>
                 </li>
             </ul>
         </nav>

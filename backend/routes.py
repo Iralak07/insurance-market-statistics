@@ -7,7 +7,11 @@ from database import (
         get_financial_exercises_by_insurer,
         upload_financial_exercise,
         get_field_value,
-        get_all_field_values
+        get_all_field_values,
+        delete_one_document,
+        delete_many_document,
+        delete_documents_by_date,
+        delete_document_by_id
 )
 
 from pipeline import (
@@ -58,7 +62,39 @@ async def get_all_field_values_route(year: int, month: str, field: str):
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
     
+
+@router.delete("/delete_one/{insurer_id}/{year}/{month}")
+async def delete_one_document_route(insurer_id: str, year: int, month: str):
+    try:
+        return await delete_one_document(insurer_id, year, month)
+    except Exception as e:
+        raise HTTPException(status_code_=400, detail=str(e))
     
+
+@router.delete("/delete_many/{insurer_id}/{year}/{month}")
+async def delete_many_document_route(insurer_id: str, year: int, month: str):
+    try:
+        return await delete_many_document(insurer_id, year, month)
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+
+@router.delete("/delete/{year}/{month}")
+async def delete_documents_by_date_route(year: int = None, month: str = None):
+    try:
+        return await delete_documents_by_date(year, month)
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+
+@router.delete("/delete/{document_id}")
+async def delete_document_by_id_route(document_id: str):
+    try:
+        return await delete_document_by_id(document_id)
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+
 @router.post("/exercise")
 async def upload_exercise(data: dict):
     try:

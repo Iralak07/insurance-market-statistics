@@ -6,7 +6,8 @@ import json
 # Retrieves the value from a dataframe based on the given row value and column name.
 def get_value_from_df(df, row_value, column_name):    
     try:
-        row = df[df['Nombre de la Cuenta'] == row_value]
+        row = df[df['nombre de la cuenta'] == row_value]
+        print(row[column_name].values[0])
         return row[column_name].values[0]
     except (IndexError, KeyError):
         return "Error: Invalid row or column names. Please verify and try again."
@@ -34,9 +35,10 @@ def create_new_df(dfs, rows, columns):
 # Create a list containing a dataframe for every column
 def generate_df_list(dfs, rows, columns):
     dfs_list = []
+    columns = [column.lower() for column in columns]
 
     for column in columns:
-        new_df = pd.DataFrame(rows, columns=["Nombre de la Cuenta"])
+        new_df = pd.DataFrame(rows, columns=["nombre de la cuenta"])
         new_df[column] = None
 
         for df in dfs:
@@ -57,7 +59,7 @@ def create_dict_from_df(df):
     new_dict["Insurer"] = second_key
 
     for _, row in df.iterrows():
-        new_dict[row['Nombre de la Cuenta']] = row[second_key]
+        new_dict[row['nombre de la cuenta']] = row[second_key]
 
     return new_dict
 
@@ -127,13 +129,54 @@ def add_insurer_id(input_dict: dict) -> dict:
         'Nobleza Seguros S.A. Compañia De Seguros': "831",
         'Itau Seguros Paraguay S.A.': "832",
         'Familiar Seguros S.A.': "833",
-        'Atlas S.A. De Seguros': "834"
+        'Atlas S.A. De Seguros': "834",
+        'Universo de Seguros S.A.': "835"
     }
+
+    insurer_id_lower = {
+        'el comercio paraguayo s.a. de seguros': "802",
+        'la rural s.a. de seguros': "803",
+        'la paraguaya s.a. de seguros': "804",
+        'seguros generales s. a. (segesa)': "805",
+        'rumbos s.a. de seguros': "806", 
+        'la consolidada s.a. de seguros': "807",
+        'el productor s.a. de seguros y reaseguros': "808",
+        'atalaya s.a de seguros generales': "809",
+        'la independencia de seguros sociedad anonima': "810", 
+        'patria s.a. de seguros y reaseguros': "811",
+        'alianza garantía seguros y reaseguros s.a.': "812",
+        'aseguradora paraguaya s.a': "813",
+        'fénix s.a. de seguros y reaseguros': "814", 
+        'central s.a. de seguros': "815",
+        'seguros chaco s.a. de seguros y reaseguros': "816",
+        'el sol del paraguay compañía de seguros y reaseguros': "817",
+        'intercontinental de seguros y reaseguros s.a.': "818",
+        'seguridad s.a. compañía de seguros': "819",
+        'aseguradora yacyreta s.a. de seguros y reaseguros': "820",
+        'la agrícola s.a. de seguros y reaseguros': "821",
+        'ueno seguros s.a.': "822",
+        'cenit de seguros s.a.': "823",
+        'la meridional paraguaya s.a. de seguros': "824",
+        'aseguradora del este s.a de seguros y reaseguros': "825",
+        'regional s.a. de seguros y reaseguros': "801",
+        'mapfre paraguay compañía de seguros s.a.': "826",
+        'aseguradora tajy propiedad cooperativa s.a. de seguros': "827",
+        'panal compañía de seguros generales s.a.': "828",
+        'sancor seguros del paraguay s.a.': "829",
+        'royal seguros s.a. compañía de seguros': "830",
+        'nobleza seguros s.a. compania de seguros': "831",
+        'itau seguros paraguay s.a.': "832",
+        'familiar seguros s.a.': "833",
+        'atlas s.a. de seguros': "834",
+        'universo de seguros s.a.': "835"
+    }
+
+    # insurer_id = {k.lower(): v for k, v in insurer_id.items()}
 
     # If the "insurer" key is in the input dictionary and its value is in the insurer_id dictionary,
     # add a new key-value pair to the input dictionary
-    if "insurer" in input_dict and input_dict["insurer"] in insurer_id:
-        input_dict["insurer_id"] = insurer_id[input_dict["insurer"]]
+    if "insurer" in input_dict and input_dict["insurer"] in insurer_id_lower:
+        input_dict["insurer_id"] = insurer_id_lower[input_dict["insurer"]]
 
     return input_dict
 

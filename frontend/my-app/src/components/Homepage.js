@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import DataTable from './DataTable';
-import TestChart from './TestChart';
 import ChartComponent from './ChartComponent';
 
 function Homepage() {
@@ -24,6 +23,12 @@ function Homepage() {
 		.then(response => response.json())
 		.then(data => setExercisesData(data))
 		.catch(error => console.error(error));
+	};
+
+	const fetchAccountValue = (insurerId, year, month, account) => {
+		fetch(`http://localhost:8000/field_value/${insurerId}/${year}/${month}/${field}`)
+		.then(response => response)
+		.catch(error => console.error(error))
 	};
 
     const handleInputChange = (event) => {

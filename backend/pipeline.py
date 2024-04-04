@@ -24,6 +24,12 @@ def extract_dataframes(dataframes_dic: dict) -> list:
         estado_resultados = dataframes_dic['3']
         ingresos_egresos = dataframes_dic['4']
         dataframes = [balance_general, estado_resultados, ingresos_egresos]
+        for df in dataframes:
+                df.columns = df.columns.str.lower()
+        print(balance_general.columns)
+        print(dataframes[0].columns)
+        print(COLUMNS)
+        
         return dataframes
 
 
