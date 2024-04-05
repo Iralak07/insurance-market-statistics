@@ -23,6 +23,10 @@ from models import (
         Insurer,
 )
 
+from preprocessing_tools import (
+        extract_list
+)
+
 router = APIRouter()
 
 
@@ -56,7 +60,7 @@ async def get_all_field_values_route(year: int, month: str, field: str):
     try:
         results = await get_all_field_values(year, month, field)
         if results:
-            return results
+            return extract_list(results)
         else:
             raise HTTPException(status_code=404, detail="No documents found for the given year and month")
     except Exception as e:

@@ -223,6 +223,18 @@ def restructure_data(input_dict):
     return output_dict
 
 
+def extract_list(data):
+    insurer_names = [item['insurer_name'] for item in data]
+    numeric_values = [item['value']['$numberLong'] for item in data]
+    output_numeric = []
+    for value in numeric_values:
+        try:
+            output_numeric.append(int(value))
+        except ValueError:
+            output_numeric.append(0)
+    return insurer_names, output_numeric
+
+
 def format_for_mongodb(data: dict) -> dict:
     # Convert the dictionary to a JSON-formatted string
     json_str = json.dumps(data)

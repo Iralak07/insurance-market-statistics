@@ -10,7 +10,7 @@ const Index = () => {
         const year=values.year
         const month=values.month
         const cuenta=values.cuenta
-        const response=axios.get('http://localhost:8000/all_field_values/2023/diciembre/balance_general.resultado_ejercicio')
+        const response=axios.get(`http://localhost:8000/all_field_values/${year}/${month}/${cuenta}`)
         setChartData(response.data)
         console.log(response);
     }
@@ -21,14 +21,14 @@ const Index = () => {
                 onSubmit={handleSubmit}
             >
                 <Form>
-                    <label htmlFor="firstName">First Name</label>
-                    <Field id="firstName" name="year" placeholder="John" />
+                    <label htmlFor="year">Year</label>
+                    <Field id="yearField" name="year" placeholder="year" />
 
-                    <label htmlFor="lastName">Last Name</label>
-                    <Field id="lastName" name="month" placeholder="Doe" />
+                    <label htmlFor="month">Month</label>
+                    <Field id="monthField" name="month" placeholder="month" />
 
-                    <label htmlFor="email">Email</label>
-                    <Field id="email" name="cuenta" placeholder="cuenta" />
+                    <label htmlFor="cuenta">Cuenta</label>
+                    <Field id="cuentaField" name="cuenta" placeholder="cuenta" />
 
                     <button type="submit">Submit</button>
                 </Form>
