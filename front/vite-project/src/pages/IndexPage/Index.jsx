@@ -1,18 +1,22 @@
 import React, { useState } from 'react';
 import { Formik, Field, Form } from 'formik';
 import axios from "axios";
+import SomeChart from '../../components/SomeChart/SomeChart';
 
 const Index = () => {
-    const [chartData, setChartData] = useState([])
-    const [names, setNames] = useState([])
-    const [monto, setMonto] = useState([])
-    const handleSubmit= (values) => {
-        const year=values.year
-        const month=values.month
-        const cuenta=values.cuenta
-        const response=axios.get(`http://localhost:8000/all_field_values/${year}/${month}/${cuenta}`)
-        setChartData(response.data)
-        console.log(response);
+    const [chartData, setChartData] = useState([]);
+    const [names, setNames] = useState([]);
+    const [monto, setMonto] = useState([]);
+    const handleSubmit = async (values) => {
+        const year=values.year;
+        const month=values.month;
+        const cuenta=values.cuenta;
+        const response= await axios.get(`http://localhost:8000/all_field_values/${year}/${month}/${cuenta}`);
+        setChartData(response.data);
+        setNames(response.data[0]);
+        setMonto(response.data[1]);
+        console.log(response.data[0], response.data[1]);
+        console.log(response.data);
     }
     return (
         <div style={{background: "red"}}>
@@ -33,7 +37,9 @@ const Index = () => {
                     <button type="submit">Submit</button>
                 </Form>
             </Formik>
-        </div>
+            <p>{chartData}</p>
+            <SomeChart chartData={chartData} />
+        </div>      
     );
 }
 
