@@ -1,41 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
+import Chart from 'react-apexcharts';
 
-const SomeChart = ({ chartData }) => {
-    const [graphicData, setGraphicData] = useState(chartData)
-
-    useEffect(() => {
-        setGraphicData(chartData)
-    }, [chartData])
-
-    const chartOptions = {
-        series: [{
-            data: graphicData[1]
-        }],
+function SomeChart(props) {
+    const [chartData, setChartData] = useState([]);
+    const [names, setNames] = useState([]);
+    const [monto, setMonto] = useState([]);
+    const series = [
+        {
+            name: "Monto",
+            data: monto
+        },
+    ];
+    const options = {
         chart: {
-            type: 'bar',
-            height: 400,
-        },
-        plotOptions: {
-            bar: {
-                borderRadius: 4,
-                horizontal: true,
-            }
-        },
-        dataLabels: {
-            enabled: false
+            id: "basic-bar"
         },
         xaxis: {
-            categories: graphicData[0],
+            categories: names
         }
-    }; 
-
-    return (
+    }
+    useEffect(() => {
+        setChartData(props.data);
+        setNames(props.data[0]);
+        setMonto(props.data[1]);
+    }, [props.data]);
+    
+    return(
         <div>
-            <div id="chart">
-                <ReactApexChart options={chartOptions} series={graphicData[1]} type="bar" height={400} />
-            </div>
-            <div id="hrml-dist"></div>
+            <Chart options={options} type="bar" series={series} width="80%" />
         </div>
     );
 }

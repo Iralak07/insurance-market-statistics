@@ -19,7 +19,7 @@ const Index = () => {
         console.log(response.data);
     }
     return (
-        <div style={{background: "red"}}>
+        <div style={{ width: "100vw", height: "100vh", background: "gray" }}>
             <Formik
                 initialValues={{ year: '', month: '', cuenta: '' }}
                 onSubmit={handleSubmit}
@@ -37,8 +37,7 @@ const Index = () => {
                     <button type="submit">Submit</button>
                 </Form>
             </Formik>
-            <p>{chartData}</p>
-            <SomeChart chartData={chartData} />
+            <SomeChart data={chartData} />
         </div>      
     );
 }
