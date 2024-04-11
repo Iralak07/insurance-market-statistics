@@ -3,7 +3,6 @@ import ReactApexChart from 'react-apexcharts';
 import Chart from 'react-apexcharts';
 
 function SomeChart(props) {
-    const [chartData, setChartData] = useState([]);
     const [names, setNames] = useState([]);
     const [monto, setMonto] = useState([]);
     const series = [
