@@ -5,16 +5,12 @@ import SomeChart from '../../components/SomeChart/SomeChart';
 
 const Index = () => {
     const [chartData, setChartData] = useState([]);
-    const [names, setNames] = useState([]);
-    const [monto, setMonto] = useState([]);
     const handleSubmit = async (values) => {
         const year=values.year;
         const month=values.month;
         const cuenta=values.cuenta;
         const response= await axios.get(`http://localhost:8000/all_field_values/${year}/${month}/${cuenta}`);
         setChartData(response.data);
-        setNames(response.data[0]);
-        setMonto(response.data[1]);
         console.log(response.data[0], response.data[1]);
         console.log(response.data);
     }
