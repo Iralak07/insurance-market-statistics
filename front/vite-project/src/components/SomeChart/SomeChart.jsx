@@ -20,7 +20,6 @@ function SomeChart(props) {
         }
     }
     useEffect(() => {
-        setChartData(props.data);
         setNames(props.data[0]);
         setMonto(props.data[1]);
     }, [props.data]);

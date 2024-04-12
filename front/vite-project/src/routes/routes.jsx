@@ -12,6 +12,12 @@ export default createBrowserRouter([
                     <Index />
                 ),
             },
+            {
+                path: "/file-upload",
+                element: (
+                    <FileUploadPage />
+                ),
+            }
         ],
     },
 ]);
