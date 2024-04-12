@@ -1,5 +1,6 @@
 import Layout from "../components/Layout/Layout";
 import Index from "../pages/IndexPage/Index";
+import FileUpload from "../pages/FileUploadPage/FileUpload";
 
 export default createBrowserRouter([
     {
@@ -15,7 +16,7 @@ export default createBrowserRouter([
             {
                 path: "/file-upload",
                 element: (
-                    <FileUploadPage />
+                    <FileUpload />
                 ),
             }
         ],

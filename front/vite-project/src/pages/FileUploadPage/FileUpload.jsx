@@ -1,7 +1,7 @@
 import React from 'react';
 import ExcelUpload from '../../components/UploadExcel/UploadExcel';
 
-function FileUploadPage() {
+function FileUpload() {
     return (
         <div>
             <h1>File Upload</h1>
@@ -10,4 +10,4 @@ function FileUploadPage() {
     );
 }
 
-export default FileUploadPage;
+export default FileUpload;
