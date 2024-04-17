@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Formik, Field, Form } from 'formik';
 import axios from "axios";
-import SomeChart from '../../components/SomeChart/SomeChart';
+import SomeChart from '../../components/Charts/SomeChart';
 
 const Index = () => {
     const [chartData, setChartData] = useState([]);
