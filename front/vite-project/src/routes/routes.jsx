@@ -2,8 +2,9 @@ import Layout from "../components/Layout/Layout";
 import Index from "../pages/IndexPage/Index";
 import FileUpload from "../pages/FileUploadPage/FileUpload";
 import TableDisplay from "../pages/TablePage/TableDisplay";
+import { createBrowserRouter } from "react-router-dom";
 
-export default createBrowserRouter([
+const router = createBrowserRouter([
     {
         path: "/",
         element: <Layout />,
@@ -25,3 +26,5 @@ export default createBrowserRouter([
         element: <TableDisplay />
     },
 ]);
+
+export default router;
