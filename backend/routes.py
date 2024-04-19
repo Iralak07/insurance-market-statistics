@@ -8,6 +8,7 @@ from database import (
         upload_financial_exercise,
         get_field_value,
         get_all_field_values,
+        get_monthly_exercise,
         delete_one_document,
         delete_many_document,
         delete_documents_by_date,
@@ -63,6 +64,14 @@ async def get_all_field_values_route(year: int, month: str, field: str):
             return extract_list(results)
         else:
             raise HTTPException(status_code=404, detail="No documents found for the given year and month")
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+
+@router.get("/exercise/{year}/{month}")
+async def get_monthly_exercise_route(year: int, month: str):
+    try:
+        return await get_monthly_exercise(year, month)
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
     

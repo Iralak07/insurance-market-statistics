@@ -24,13 +24,12 @@ def insurer_helper(insurer) -> dict:
     }
   
 
-
+# GET METHODS
 async def retrieve_insurer() -> list[dict]:
     insurers = []
     async for insurer in insurer_collection.find():
         insurers.append(insurer_helper(insurer))
     return insurers
-
 
 
 async def get_financial_exercises_by_insurer(insurer_id):
@@ -100,6 +99,33 @@ async def get_all_field_values(year, month, field):
     return results        
 
 
+async def get_monthly_exercise(year, month):
+    # Find all documents that match the given year and month
+    cursor = exercises_collection.find({
+        'year': year,
+        'month': month
+    })
+
+    # Initialize an empty list to store the results
+    results = []
+
+    # Iterate over the documents
+    async for document in cursor:
+        # Find the insurer by id
+        document['_id'] = str(document['_id'])  # convert ObjectId to string
+        insurer = await insurer_collection.find_one({'_id': document['insurer_id']})
+        if insurer:
+            # Add the document to the results list
+            results.append({
+                'insurer_name': insurer['name'],
+                'exercise': document
+            })
+
+    # Return the results
+    return results
+
+
+# DELETE METHODS
 async def delete_one_document(insurer_id, year, month):
     # Delete the document that matches the given parameters
     result = await exercises_collection.delete_one({
@@ -160,6 +186,7 @@ async def delete_document_by_id(document_id):
         return {"status": "failure", "message": "No documents matches the given parameters."}
 
 
+# PUT METHODS
 async def upload_financial_exercise(data) -> str:
     # Insert the document into the collection
     result = await exercises_collection.insert_one(data)
