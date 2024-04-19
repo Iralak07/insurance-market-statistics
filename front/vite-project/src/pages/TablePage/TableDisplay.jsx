@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Formik, Field, Form } from 'formik';
 import SomeTable from '../../components/Tables/SomeTable';
 
 function TableDisplay() {
+
     return (
         <div>
-            <h1>Table Display</h1>
+            <h2>Table Display</h2>
             <SomeTable />
         </div>
-    )
+    );
 }
-
 
 export default TableDisplay;
