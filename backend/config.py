@@ -31,4 +31,4 @@ COLUMNS = ['el comercio paraguayo s.a. de seguros', 'la rural s.a. de seguros', 
 'seguridad s.a. compañía de seguros', 'aseguradora yacyreta s.a. de seguros y reaseguros', 'la agrícola s.a. de seguros y reaseguros', 'ueno seguros s.a.', 'cenit de seguros s.a.', 
 'la meridional paraguaya s.a. de seguros', 'aseguradora del este s.a de seguros y reaseguros', 'regional s.a. de seguros y reaseguros', 'mapfre paraguay compañía de seguros s.a.', 
 'aseguradora tajy propiedad cooperativa s.a. de seguros', 'panal compañía de seguros generales s.a.', 'sancor seguros del paraguay s.a.', 'royal seguros s.a. compañía de seguros', 
-'nobleza seguros s.a. compania de seguros', 'itau seguros paraguay s.a.', 'familiar seguros s.a.', 'atlas s.a. de seguros', 'universo de seguros s.a.']
+'nobleza seguros s.a. compañia de seguros', 'itau seguros paraguay s.a.', 'familiar seguros s.a.', 'atlas s.a. de seguros', 'universo de seguros s.a.']

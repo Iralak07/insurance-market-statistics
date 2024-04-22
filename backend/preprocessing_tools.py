@@ -164,7 +164,7 @@ def add_insurer_id(input_dict: dict) -> dict:
         'panal compañía de seguros generales s.a.': "828",
         'sancor seguros del paraguay s.a.': "829",
         'royal seguros s.a. compañía de seguros': "830",
-        'nobleza seguros s.a. compania de seguros': "831",
+        'nobleza seguros s.a. compañia de seguros': "831",
         'itau seguros paraguay s.a.': "832",
         'familiar seguros s.a.': "833",
         'atlas s.a. de seguros': "834",
