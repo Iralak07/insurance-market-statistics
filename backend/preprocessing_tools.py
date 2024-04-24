@@ -224,14 +224,21 @@ def restructure_data(input_dict):
 
 
 def extract_list(data):
+    # Create a list of insuere names by extracting the 'insurer_name' field from each item in the data
     insurer_names = [item['insurer_name'] for item in data]
+    # Create a list of numeric values by extracting the '$numberLong' field from the 'value' field in each item in the data
     numeric_values = [item['value']['$numberLong'] for item in data]
+    # Initialize an empty list to store the numeric values after conversion to integers
     output_numeric = []
+    # Iterate over the numeric values
     for value in numeric_values:
         try:
+            # Try to convert the value to an integer and append it to the output_numeric list
             output_numeric.append(int(value))
         except ValueError:
+            # If the value cannot be converted to an integer, append 0 to the output_numeric list
             output_numeric.append(0)
+    # Return the list of insurer names and the list of numeric values
     return insurer_names, output_numeric
 
 

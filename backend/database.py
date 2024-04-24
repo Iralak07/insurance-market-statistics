@@ -125,6 +125,43 @@ async def get_monthly_exercise(year, month):
     return results
 
 
+async def get_field_values_by_insurer(insurer_id, field):
+    # Initialize an empty list to store the results
+    results = []
+
+    # Find all documents in the exercises collection that match the insurer_id
+    cursor = exercises_collection.find({'insurer_id': insurer_id})
+
+    # Iterate over the documents
+    async for document in  cursor:
+        # Find the insurer by id
+        insurer = await insurer_collection.find_one({'_id': insurer_id})
+
+        if insurer:
+            # Get the insurer name 
+            insurer_name = insurer.get('name')
+
+            # Get the year and month from the document
+            year = document.get('year')
+            month = document.get('month')
+
+            # Get the field value from the document using the get_field_value function
+            field_value = await get_field_value(insurer_id, year, month, field)
+
+            # Add the result to the results list
+            results.append({
+                'insurer_name': insurer_name,
+                'year': year,
+                'month': month,
+                field: field_value
+            })
+
+    # Return the results
+    return results
+
+
+
+
 # DELETE METHODS
 async def delete_one_document(insurer_id, year, month):
     # Delete the document that matches the given parameters

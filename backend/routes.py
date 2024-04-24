@@ -9,6 +9,7 @@ from database import (
         get_field_value,
         get_all_field_values,
         get_monthly_exercise,
+        get_field_values_by_insurer,
         delete_one_document,
         delete_many_document,
         delete_documents_by_date,
@@ -74,7 +75,16 @@ async def get_monthly_exercise_route(year: int, month: str):
         return await get_monthly_exercise(year, month)
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
-    
+
+
+@router.get("/field_values_insurer/{insurer_id}/{field}")
+async def get_field_values_by_insurer_route(insurer_id: str, field: str):
+    try:
+        results = await get_field_values_by_insurer(insurer_id, field)
+        return {"results": results}
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
 
 @router.delete("/delete_one/{insurer_id}/{year}/{month}")
 async def delete_one_document_route(insurer_id: str, year: int, month: str):
