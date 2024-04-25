@@ -43,8 +43,11 @@ function LineChart() {
         const response2 = await axios.get(`http://localhost:8000/field_values_insurer/${insurer_id}/${values.cuenta2}`);
         const response3 = await axios.get(`http://localhost:8000/field_values_insurer/${insurer_id}/${values.cuenta3}`);
         setData1(response1.data.results);
+        console.log(response1)
         setData2(response2.data.results);
+        console.log(response2)
         setData3(response3.data.results);
+        console.log(response3)
     }
 
     return(
