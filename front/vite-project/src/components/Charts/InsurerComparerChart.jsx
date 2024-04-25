@@ -8,6 +8,7 @@ function InsurerComparerChart() {
     const [data2, setData2] = useState([]);
     const [data3, setData3] = useState([]);
     const [cuenta, setCuenta] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const series = [
         {
@@ -34,6 +35,7 @@ function InsurerComparerChart() {
     }
 
     const handleSubmit = async (values) => {
+        setLoading(true);
         const { insurer_id1, insurer_id2, insurer_id3, cuenta } = values;
         setCuenta(cuenta);
         const response1 = await axios.get(`http://localhost:8000/field_values_insurer/${insurer_id1}/${cuenta}`);
@@ -45,6 +47,7 @@ function InsurerComparerChart() {
         console.log(response2);
         setData3(response3.data.results);
         console.log(response3);
+        setLoading(false);
     }
 
     return(
@@ -69,7 +72,11 @@ function InsurerComparerChart() {
                     <button type="submit">Fetch Data</button>
                 </Form>
             </Formik>
-            <Chart options={options} series={series} type="line" width="80%" />
+            {loading ? (
+                <dir>Loading...</dir>
+            ) : ( 
+                <Chart options={options} series={series} type="line" width="80%" />
+            )}
         </div>
     );
 }
