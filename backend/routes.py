@@ -29,7 +29,12 @@ from preprocessing_tools import (
         extract_list
 )
 
-router = APIRouter()
+router = APIRouter(
+    prefix="/finance",
+    tags=["finance"]
+)
+
+
 
 
 @router.get("/insurer")
